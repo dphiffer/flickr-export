@@ -1,0 +1,23 @@
+body {
+	font-size: 18px;
+	line-height: 36px;
+	font-family: menlo, monospace;
+}
+
+.hidden {
+	display: none;
+}
+
+input[type="text"] {
+	border: none;
+	background: #eee;
+	font-size: 18px;
+	font-family: menlo, monospace;
+	padding: 5px;
+}
+
+button, input[type="submit"] {
+	display: block;
+	font-size: 18px;
+	font-family: menlo, monospace;
+}

@@ -1,0 +1,4 @@
+// See also:
+// https://www.flickr.com/services/apps/create/apply/
+
+var flickr_api_key = 'PLEASE CONFIGURE ME';

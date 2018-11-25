@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Flickr Export</title>
+		<link rel="stylesheet" href="css/flickr-export.css">
+	</head>
+	<body>
+		<h1>Flickr Export</h1>
+		<p>Export your Flickr account.</p>
+		<form action="." id="username">
+			<p>
+				<label for="username-input">Your Flickr username:</label>
+				<input type="text" id="username-input">
+			</p>
+			<input type="submit" value="Continue →">
+			<div class="response"></div>
+		</form>
+		<div id="generate" class="hidden">
+			<p>Generate zip files of <a href="#" id="change-user-link">user</a>'s <a href="public.html">public</a> photo stream.</p>
+			<button id="generate-btn">Start →</button>
+			<div class="response"></div>
+			<div class="progress"></div>
+		</div>
+		<div id="save" class="hidden">
+			<p>
+				Save this zip file and then continue:
+				<a href="#" id="save-link">flickr.zip</a>
+			</p>
+			<button id="save-continue">Continue →</button>
+			<div class="response"></div>
+		</div>
+		<div id="done" class="hidden">
+			All done! <a href="#" id="restart">Start over?</a>
+		</div>
+		<script src="config.js"></script>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/jszip.min.js"></script>
+		<script src="js/FileSaver.min.js"></script>
+		<script src="js/flickr.js"></script>
+		<script src="js/flickr-export.js"></script>
+	</body>
+</html>
