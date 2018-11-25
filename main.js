@@ -1,34 +1,37 @@
 const {app, BrowserWindow} = require('electron');
+const server = require('./server');
 
 let main;
 
-function create_window() {
+app.on('ready', () => {
+
+	// See: https://gist.github.com/maximilian-lindsey/a446a7ee87838a62099d/
+	server();
 
 	main = new BrowserWindow({
-		width: 800, height: 600
+		width: 800,
+		height: 600,
+		webPreferences: {
+			nodeIntegration: false
+		}
 	});
 
-	main.loadFile('index.html');
+	main.loadURL('https://localhost:5555/');
 
 	// Open the DevTools.
 	main.webContents.openDevTools()
 
 	// Emitted when the window is closed.
-	main.on('closed', function() {
+	main.on('closed', () => {
 		// Dereference the window object, usually you would store windows
 		// in an array if your app supports multi windows, this is the time
 		// when you should delete the corresponding element.
 		mainWindow = null
 	});
-}
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', create_window);
+});
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function() {
+app.on('window-all-closed', () => {
 	// On macOS it is common for applications and their menu bar
 	// to stay active until the user quits explicitly with Cmd + Q
 	if (process.platform !== 'darwin') {
@@ -42,4 +45,9 @@ app.on('activate', function() {
 	if (main === null) {
 		create_window()
 	}
+});
+
+app.on('certificate-error', function(event, webContents, url, error, certificate, callback) {
+	event.preventDefault();
+	callback(true);
 });
