@@ -10,16 +10,13 @@ app.on('ready', () => {
 
 	main = new BrowserWindow({
 		width: 800,
-		height: 600,
-		webPreferences: {
-			nodeIntegration: false
-		}
+		height: 600
 	});
 
-	main.loadURL('https://localhost:5555/');
+	main.loadFile('static/index.html');
 
 	// Open the DevTools.
-	main.webContents.openDevTools()
+	main.webContents.openDevTools();
 
 	// Emitted when the window is closed.
 	main.on('closed', () => {

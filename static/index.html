@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.flickr.com https://*.staticflickr.com">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://localhost:5555 https://api.flickr.com 'sha256-45x2ooY3zktZEiyGD/YE0Im53PhQfQz5o8pWQKvyfqE='">
 		<title>Flickr Export</title>
 		<link rel="stylesheet" href="css/flickr-export.css">
 	</head>
@@ -17,6 +17,10 @@
 			<input type="submit" value="Continue →">
 			<div class="response"></div>
 		</form>
+		<div id="export" class="hidden">
+			<p>Pick a folder to export your account to.</p>
+			<button id="export-btn">Export to →</button>
+		</div>
 		<div id="generate" class="hidden">
 			<p>Generate zip files of <a href="#" id="change-user-link">user</a>'s <a href="public.html">public</a> photo stream.</p>
 			<button id="generate-btn">Start →</button>
@@ -42,5 +46,12 @@
 		<script src="js/flickr.js"></script>
 		<script src="js/flickr-export.js"></script>
 		<script src="js/init-post.js"></script>
+		<script>
+
+		if (typeof require == 'function') {
+			require('./js/renderer');
+		}
+
+		</script>
 	</body>
 </html>

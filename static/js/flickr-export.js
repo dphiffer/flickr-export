@@ -32,14 +32,26 @@ $(document).ready(function() {
 				count = 0;
 
 				$('#change-user-link').html(user.username._content);
-				$('#generate').removeClass('hidden');
 				$('#username').addClass('hidden');
+
+				if (is_electron_app) {
+					$('#export').removeClass('hidden');
+				} else {
+					$('#generate').removeClass('hidden');
+				}
+
 			} else if (rsp.message) {
 				$('#username .response').html(rsp.message);
 			} else {
 				$('#username .response').html('Could not find that username.');
 			}
 		});
+	});
+
+	$('#export-btn').click(function(e) {
+		e.preventDefault();
+		var dir = pick_export_dir();
+		console.log(dir);
 	});
 
 	// STEP 2 generate a zip file
