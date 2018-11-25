@@ -1,0 +1,24 @@
+{
+  "name": "flickr-export",
+  "version": "0.0.1",
+  "description": "Export your Flickr account",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^3.0.10"
+  },
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dphiffer/flickr-export.git"
+  },
+  "author": "Dan Phiffer <dan@phiffer.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dphiffer/flickr-export/issues"
+  },
+  "homepage": "https://github.com/dphiffer/flickr-export#readme"
+}

@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.flickr.com https://*.staticflickr.com">
 		<title>Flickr Export</title>
 		<link rel="stylesheet" href="css/flickr-export.css">
 	</head>
@@ -33,11 +34,13 @@
 		<div id="done" class="hidden">
 			All done! <a href="#" id="restart">Start over?</a>
 		</div>
-		<script src="config.js"></script>
+		<script src="js/init-pre.js"></script>
 		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="config.js"></script>
 		<script src="js/jszip.min.js"></script>
 		<script src="js/FileSaver.min.js"></script>
 		<script src="js/flickr.js"></script>
 		<script src="js/flickr-export.js"></script>
+		<script src="js/init-post.js"></script>
 	</body>
 </html>
