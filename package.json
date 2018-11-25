@@ -4,7 +4,9 @@
   "description": "Export your Flickr account",
   "main": "main.js",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mkdirp": "^0.5.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "electron": "^3.0.10"

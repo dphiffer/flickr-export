@@ -48,15 +48,7 @@ $(document).ready(function() {
 		});
 	});
 
-	$('#export-btn').click(function(e) {
-		e.preventDefault();
-		var dir = pick_export_dir();
-		console.log(dir);
-	});
-
-	// STEP 2 generate a zip file
-	$('#generate-btn').click(function(e) {
-		e.preventDefault();
+	function toggle_export() {
 		paused = ! paused;
 		if (paused) {
 			$('#generate-btn').html('Restart →');
@@ -66,6 +58,23 @@ $(document).ready(function() {
 			update_progress('Getting ready...');
 			load_page();
 		}
+	}
+
+	$('#export-btn').click(function(e) {
+		e.preventDefault();
+
+		pick_export_dir();
+
+		$('#export').addClass('hidden');
+		$('#generate').removeClass('hidden');
+
+		toggle_export();
+	});
+
+	// STEP 2 generate a zip file
+	$('#generate-btn').click(function(e) {
+		e.preventDefault();
+		toggle_export();
 	});
 
 	// STEP 3 continue to the next page
@@ -89,6 +98,7 @@ $(document).ready(function() {
 	$('#restart').click(function(e) {
 		e.preventDefault();
 		$('#done').addClass('hidden');
+		$('#username .response').html('');
 		$('#username').removeClass('hidden');
 	});
 
@@ -149,7 +159,8 @@ $(document).ready(function() {
 			extras: 'description, license, date_upload, date_taken, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_o',
 			content_type: 7,
 			per_page: 500,
-			page: page
+			page: page,
+			sort: 'date-posted-asc'
 		}, function(rsp) {
 			max_pages = rsp.photos.pages;
 			for (var i = 0; i < rsp.photos.photo.length; i++) {
@@ -177,6 +188,15 @@ $(document).ready(function() {
 			var json_folder = archive.zip.folder('json');
 
 			update_progress('Loading ' + photo.title + ' (' + upload[0] + ')');
+
+			if (typeof save_photo == 'function') {
+				return save_photo(user, photo)
+					.then(load_next)
+					.catch((err) => {
+						console.log(err);
+						update_progress('Error loading photo.');
+					});
+			}
 
 			var type = 'application/octet-stream';
 			var filename = photo.id;
@@ -213,6 +233,14 @@ $(document).ready(function() {
 				}
 			};
 			xhr.send();
+		} else if (typeof save_photo == 'function') {
+			if (page == max_pages) {
+				done();
+			} else {
+				page++;
+				count = 0;
+				load_page();
+			}
 		} else {
 			$('#save-link').html(archive.filename);
 			$('#save .reponse').html('');
